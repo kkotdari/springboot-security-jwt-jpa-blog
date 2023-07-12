@@ -1,6 +1,6 @@
 # springboot-security-jwt-jpa-blog
  
- 스프링부트-스프링시큐리티-JWT-스프링데이터JPA-타임리프-연습_블로그_프로젝트
+ 기술 연습 블로그 프로젝트
 
  Stacks
  1. JAVA11 & Spring Boot Framework
