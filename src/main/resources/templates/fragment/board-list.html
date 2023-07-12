@@ -6,10 +6,14 @@
 </head>
 <body>
     <tr th:fragment="boardList" th:each="board : ${boardPage}">
-        <td style="font-size: 0.875rem; text-align: center;" th:text="${board.id}"></td>
-        <td style="font-size: 0.875rem;"><a th:href="@{|/boards/${board.id}|}" th:text="${board.title}"></a></td>
-        <td style="font-size: 0.875rem; text-align: center;" th:text="${board.user.username}"></td>
-        <td style="font-size: 0.875rem; text-align: center;" th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
+        <td style="font-size: 0.875rem; vertical-align: middle; text-align: center;" th:text="${board.id}"></td>
+        <td style="font-size: 0.875rem; vertical-align: middle;"><a th:href="@{|/boards/${board.id}|}" th:text="${board.title}"></a></td>
+        <td style="font-size: 0.875rem; vertical-align: middle; text-align: center;" th:text="${board.user.username}"></td>
+        <td style="font-size: 0.4375rem; vertical-align: middle; text-align: center;" th:text="${#dates.format(board.createdTime, 'yyyy MM-dd')}"></td>
+        <!-- th에서 <br> 태그 사용하기 -->
+<!--        <td style="font-size: 0.4375rem; text-align: center;" th:inline="text">-->
+<!--            [[${#dates.format(board.createdTime, 'yyyy')}]]<br>[[${#dates.format(board.createdTime, 'MM-dd')}]]-->
+<!--        </td>-->
         <td style="font-size: 0.875rem; text-align: center;" th:text="${board.hits}"></td>
     </tr>
 </body>
