@@ -9,12 +9,11 @@
     <li th:if="${pageInfo.hasPrev}" class="page-item">
         <a class="page-link" th:href="@{|boards?page=${pageInfo.prevIndex - 1}|}" th:text="Prev"></a>
     </li>
-
     <th:block th:each="i : ${#numbers.sequence(pageInfo.startNumber, pageInfo.endNumber, 1)}">
         <li th:if="${i -1 != pageInfo.pageNo}" class="page-item">
             <a class="page-link" th:href="@{|/boards?page=${i - 1}|}" th:text="${i}"></a>
         </li>
-        <li th:if="${i -1 == pageInfo.pageNo}" class="page-item font-weight-bolder">
+        <li th:if="${i -1 == pageInfo.pageNo}" class="page-item active">
             <a class="page-link" th:href="@{|/boards?page=${i - 1}|}" th:text="${i}"></a>
         </li>
     </th:block>
