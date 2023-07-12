@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>fragment: board-list</title>
+</head>
+<body>
+<div class="row">;
+    <div class="mb-4" style="margin-bottom: 0.625rem!important;">
+        <div class="card border-left-primary h-100 py-2" style="padding: 0!important; border: none;">
+            <div class="card-body" style="padding-top: 0; padding-bottom: 0;" th:fragment="replyList" th:each="reply : ${replyList}">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2" style="display: block; padding: 0.75rem 2.125rem;">
+                        <div class="d-flex flex-row align-items-center justify-content-between" style="padding: 0;">
+                            <div class="card-body" style="text-align: left; padding: 0;">
+                                 <span style="font-size: 0.75rem; font-weight: bold;" th:text="${reply.user.username}"></span>
+                            </div>
+                            <div class="card-body" style="text-align: right; padding: 0;">
+                                 <span style="font-size: 0.75rem;" th:text="${#dates.format(reply.createdTime, 'YYYY/MM/DD hh:mm')}"></span>
+                            </div>
+                        </div>
+                        <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 0.875rem; padding: 0;" th:text="${reply.content}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+</body>
+</html>

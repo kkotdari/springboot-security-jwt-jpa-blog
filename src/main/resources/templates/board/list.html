@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default-layout">
+<th:block layout:fragment="content">
+  <div class="content-body" style="padding: 0.8125rem;">
+    <div class="card mt-3 col-md-12 col-lg-6" style="margin: 0 auto; border: none;">
+      <div class="d-flex flex-row justify-content-between" style="padding: 0 !important; margin: 0 !important;">
+        <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#127759; 게시글 목록</h3>
+        <input type="hidden" th:value="${page}" />
+      </div>
+      <div class="card shadow mb-4">
+        <table class="table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th scope="col" style="font-size: 1rem; padding: 0.625rem 0; width: 15%; text-align: center;">번호</th>
+              <th scope="col" style="font-size: 1rem; padding: 0.625rem 0; width: 40%; text-align: center;">제목</th>
+              <th scope="col" style="font-size: 1rem; padding: 0.625rem 0; width: 15%; text-align: center;">작성자</th>
+              <th scope="col" style="font-size: 1rem; padding: 0.625rem 0; width: 15%; text-align: center;">작성일</th>
+              <th scope="col" style="font-size: 1rem; padding: 0.625rem 0; width: 15%; text-align: center;">조회수</th>
+            </tr>
+          </thead>
+          <tbody id="board-list"></tbody>
+        </table>
+      </div>
+      <div>
+        <div id="board-pagination"></div>
+        <div style="text-align: center;">
+          <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0.8125rem 0 0 0;">
+            <button type="button" onclick="location.href='/boards'" class="btn btn-primary" style="font-size: 1em;">새로고침</button>
+            <button type="button" onclick="location.href='/boards/save-form'" class="btn btn-primary" style="font-size: 1em;">글작성</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  // 초기 세팅
+  $(document).ready(() => {
+    let page = [[${page}]];
+    console.log("page: " + page);
+    $.ajax({
+      url: "/boards/list?page=" + page,
+      type: "GET",
+      success: function(fragment) {
+        console.log("board-list 통신 성공!");
+        document.getElementById("board-list").innerHTML = fragment;
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+
+    $.ajax({
+      url: "/boards/pagination?page=" + page,
+      type: "GET",
+      success: function(fragment) {
+        console.log("board-pagination 통신 성공!");
+        document.getElementById("board-pagination").innerHTML = fragment;
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+
+  })
+</script>
+</th:block>
+</html>
+

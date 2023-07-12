@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>fragment: board-pagination</title>
+</head>
+<body>
+<ul th:fragment="boardPagination" class="pagination justify-content-center">
+    <li th:if="${pageInfo.hasPrev}" class="page-item">
+        <a class="page-link" th:href="@{|boards?page=${pageInfo.prevIndex - 1}|}" th:text="Prev"></a>
+    </li>
+
+    <th:block th:each="i : ${#numbers.sequence(pageInfo.startNumber, pageInfo.endNumber, 1)}">
+        <li th:if="${i -1 != pageInfo.pageNo}" class="page-item">
+            <a class="page-link" th:href="@{|/boards?page=${i - 1}|}" th:text="${i}"></a>
+        </li>
+        <li th:if="${i -1 == pageInfo.pageNo}" class="page-item font-weight-bolder">
+            <a class="page-link" th:href="@{|/boards?page=${i - 1}|}" th:text="${i}"></a>
+        </li>
+    </th:block>
+
+    <li th:if="${pageInfo.hasNext}" class="page-item">
+        <a class="page-link" th:href="@{|boards?page=${pageInfo.nextIndex - 1}|}" th:text="Next"></a>
+    </li>
+</ul>
+</body>
+</html>
+
+

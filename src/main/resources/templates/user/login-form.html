@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default-layout">
+<th:block layout:fragment="content">
+    <div class="content-body" style="padding: 0.8125rem;">
+        <form action="/users/auth" method="post">
+            <div class="card mt-3 col-md-12 col-lg-4" style="margin: 0 auto; border: none;">
+                <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128100; 로그인</h3>
+                <div class="card shadow mb-4" style="padding: 2.125rem;">
+                    <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+<!--                        <span class="input-group-text justify-content-center" style="width: 25%; min-width: 100px; background-color: transparent;">아이디</span>-->
+                        <input type="text" class="form-control" name="username" aria-label="username" style="font-size: 0.875rem;" placeholder="아이디">
+                    </div>
+                    <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+<!--                        <span class="input-group-text justify-content-center" style="width: 25%; min-width: 100px; background-color: transparent;">비밀번호</span>-->
+                        <input type="password" class="form-control" name="password" aria-label="password" style="font-size: 0.875rem;" placeholder="비밀번호">
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0.8125rem 0 0 0;">
+                    <button type="button" onclick="history.back()" class="btn btn-primary" style="font-size: 1rem;">취소</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 1rem;">확인</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
+</html>

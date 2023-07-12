@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default-layout">
+<th:block layout:fragment="content">
+<div class="content-body" style="padding: 0.8125rem;">
+  <div class="card mt-3 col-md-12 col-lg-6" style="margin: 0 auto; border: none;">
+    <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128196; 게시글 상세</h3>
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3" id="board-detail" style="padding: 1rem; background-color: transparent;">
+        <div class="d-flex flex-row align-items-center justify-content-between" style="padding: 0.625rem 1.25rem;">
+          <input type="hidden" id="board-id" th:value="${board.id}" />
+          <input type="hidden" id="user-id"  th:value="${principal.id}" />
+          <div class="card-body" style="text-align: left; padding: 0; font-weight: bold;"><span style="font-size: 0.875rem;" th:text="${board.user.username}"></span></div>
+          <div class="card-body" style="text-align: right; padding: 0;"><span style="font-size: 0.875rem;" th:text="|조회수 ${board.hits}  /  ${#dates.format(board.createdTime, 'YYYY/MM/DD hh:mm')}|"></span></div>
+        </div>
+        <div class="card border-left-primary h-100" style="border: none; background-color: transparent;">
+          <div class="card-body" style="padding: 1rem;">
+            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 1.25rem; padding-bottom: 1rem; font-weight: bold;" th:text="${board.title}"></h6>
+            <div class="row no-gutters align-items-center">
+              <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 1rem;" th:text="${board.content}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Reply input -->
+      <div class="row" style="padding: 0; margin: 0 2.125rem;">
+        <div class="input-group mb-3 shadow" style="padding: 0; margin-top: 0.75rem!important; margin-bottom: 0.75rem!important; border-radius: 0.25rem;">
+          <input type="text" class="form-control" id="reply-content" placeholder="댓글을 입력하세요" style="font-size: 0.875rem; width: auto;">
+          <button type="button" id="btn-save-reply" class="btn btn-primary" style="font-size: 1rem; margin: 0; max-width: 150px; min-width: 100px;">확인</button>
+        </div>
+      </div>
+      <!-- Reply list-->
+      <div id="reply-list" style="margin: 0; padding-bottom: 1.25rem;"></div>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0.8125rem 0 0 0;">
+      <button type="button" onclick="location.href='/boards'" class="btn btn-primary" style="font-size: 1rem;">목록</button>
+      <button th:if="${board.user.id == principal.id}" type="button" th:onclick="|location.href='@{|/boards/update-form/${board.id}|}'|" class="btn btn-primary" style="font-size: 1rem;">수정</button>
+      <button th:if="${board.user.id == principal.id}" type="button" id="btn-delete-board" class="btn btn-primary" style="font-size: 1rem;">삭제</button>
+    </div>
+  </div>
+</div>
+<script src="/js/board.js"></script>
+<script th:inline="javascript">
+  // 초기 세팅
+  let boardId = $("#board-id").val();
+  $(document).ready(() => {
+      $.ajax({
+          type: "GET",
+          url: "/boards/" + boardId + "/replies",
+          success: function (fragment) {
+              console.log("reply-list 통신 성공!");
+              document.getElementById("reply-list").innerHTML = fragment;
+          },
+          error: function (err) {
+              console.log("요청실패", err);
+          }
+      });
+  })
+</script>
+</th:block>
+</html>
