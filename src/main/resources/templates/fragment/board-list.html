@@ -9,7 +9,7 @@
         <td style="font-size: 0.875rem; text-align: center;" th:text="${board.id}"></td>
         <td style="font-size: 0.875rem;"><a th:href="@{|/boards/${board.id}|}" th:text="${board.title}"></a></td>
         <td style="font-size: 0.875rem; text-align: center;" th:text="${board.user.username}"></td>
-        <td style="font-size: 0.875rem; text-align: center;" th:text="${#dates.format(board.createdTime, 'yyyy/MM/dd')}"></td>
+        <td style="font-size: 0.875rem; text-align: center;" th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
         <td style="font-size: 0.875rem; text-align: center;" th:text="${board.hits}"></td>
     </tr>
 </body>
