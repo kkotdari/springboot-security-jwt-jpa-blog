@@ -16,7 +16,7 @@
                                  <span style="font-size: 0.75rem; font-weight: bold;" th:text="${reply.user.username}"></span>
                             </div>
                             <div class="card-body" style="text-align: right; padding: 0;">
-                                 <span style="font-size: 0.75rem;" th:text="${#dates.format(reply.createdTime, 'YYYY/MM/DD hh:mm')}"></span>
+                                 <span style="font-size: 0.75rem;" th:text="${#dates.format(reply.createdTime, 'yyyy-MM-dd hh:mm')}"></span>
                             </div>
                         </div>
                         <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 0.875rem; padding: 0;" th:text="${reply.content}"></div>
