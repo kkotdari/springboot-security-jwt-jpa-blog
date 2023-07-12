@@ -29,7 +29,6 @@ public class UserApiController {
 
     @PostMapping("/auth")
     public ResponseDTO<Integer> postUser(@RequestBody User requestUser) {
-        System.out.println("UserApiController.postUser");
         userService.register(requestUser);
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson 라이브러리)
     }
