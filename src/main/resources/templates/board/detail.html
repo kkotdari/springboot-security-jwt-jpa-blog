@@ -5,7 +5,7 @@
 <th:block layout:fragment="content">
 <div class="content-body" style="padding: 0.8125rem;">
   <div class="card mt-3 col-md-12 col-lg-6" style="margin: 0 auto; border: none;">
-    <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128196; 게시글 상세</h3>
+    <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128195; 게시글 상세</h3>
     <!-- Dropdown Card Example -->
     <div class="card shadow mb-4">
       <!-- Card Header - Dropdown -->
@@ -14,7 +14,7 @@
           <input type="hidden" id="board-id" th:value="${board.id}" />
           <input type="hidden" id="user-id"  th:value="${principal.id}" />
           <div class="card-body" style="text-align: left; padding: 0; font-weight: bold;"><span style="font-size: 0.875rem;" th:text="${board.user.username}"></span></div>
-          <div class="card-body" style="text-align: right; padding: 0;"><span style="font-size: 0.875rem;" th:text="|조회수 ${board.hits}  /  ${#dates.format(board.createdTime, 'YYYY/MM/DD hh:mm')}|"></span></div>
+          <div class="card-body" style="text-align: right; padding: 0;"><span style="font-size: 0.875rem;" th:text="|조회수 ${board.hits}  /  ${#dates.format(board.createdTime, 'yyyy-MM-dd hh:mm')}|"></span></div>
         </div>
         <div class="card border-left-primary h-100" style="border: none; background-color: transparent;">
           <div class="card-body" style="padding: 1rem;">
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div style="text-align: center;">
-    <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0.8125rem 0 0 0;">
+    <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0; border-radius: 0.25rem;">
       <button type="button" onclick="location.href='/boards'" class="btn btn-primary" style="font-size: 1rem;">목록</button>
       <button th:if="${board.user.id == principal.id}" type="button" th:onclick="|location.href='@{|/boards/update-form/${board.id}|}'|" class="btn btn-primary" style="font-size: 1rem;">수정</button>
       <button th:if="${board.user.id == principal.id}" type="button" id="btn-delete-board" class="btn btn-primary" style="font-size: 1rem;">삭제</button>
