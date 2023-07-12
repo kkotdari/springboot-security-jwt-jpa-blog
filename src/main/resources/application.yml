@@ -12,8 +12,8 @@ spring:
     datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3307/blog?serverTimezone=Asia/Seoul
-      username: kkot
-      password: 1234
+      username: 
+      password: 
 
     jpa:
       open-in-view: true
@@ -41,4 +41,4 @@ spring:
 
 # OAuth2 인증 회원용 비밀번호
 kkot:
-  key: 1234
+  key: 
