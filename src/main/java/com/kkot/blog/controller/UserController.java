@@ -3,12 +3,14 @@ package com.kkot.blog.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kkot.blog.config.auth.PrincipalDetails;
 import com.kkot.blog.model.KakaoProfile;
 import com.kkot.blog.model.OAuthToken;
 import com.kkot.blog.model.User;
 import com.kkot.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,8 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +55,9 @@ public class UserController {
         return "user/login-form";
     }
 
-    @GetMapping("/user/update-form")
-    public String updateForm(){
+    @GetMapping("/update-form")
+    public String updateForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
+        model.addAttribute("user", userService.find(principalDetails.getUser().getId()));
         return "user/update-form";
     }
 
