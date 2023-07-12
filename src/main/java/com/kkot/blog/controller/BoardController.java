@@ -1,6 +1,7 @@
 package com.kkot.blog.controller;
 
 import com.kkot.blog.config.auth.PrincipalDetails;
+import com.kkot.blog.dto.PageDTO;
 import com.kkot.blog.model.Board;
 import com.kkot.blog.service.BoardService;
 import com.kkot.blog.service.ReplyService;
@@ -44,7 +45,8 @@ public class BoardController {
     @GetMapping("/pagination")
     public String boardPagination(@PageableDefault(size = PAGE_BOARD_COUNT, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
         Page<Board> boardPage = boardService.page(pageable);
-        model.addAttribute("pageInfo", boardService.getPageInfo(boardPage, pageable.getPageNumber()));
+        PageDTO pageDTO = boardService.getPageInfo(boardPage, pageable.getPageNumber());
+        model.addAttribute("pageInfo", pageDTO);
         return "fragment/board-pagination :: boardPagination";
     }
     //////////// ~ 두 메서드 통합하기
