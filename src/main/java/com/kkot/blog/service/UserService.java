@@ -25,6 +25,14 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public User find(int id) {
+        User user = userRepository.findById(id).orElseThrow(()->{
+            return new IllegalArgumentException("해당 회원을 찾을 수 업습니다. ID: " + id);
+        });
+        return user;
+    }
+
     @Transactional(readOnly = true)
     public User find(String username) {
         User user = userRepository.findByUsername(username).orElseGet(()->{
