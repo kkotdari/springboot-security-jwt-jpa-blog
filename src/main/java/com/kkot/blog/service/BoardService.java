@@ -57,7 +57,9 @@ public class BoardService {
         return new PageDTO(totalPage, pageNo, startNumber, endNumber, hasPrev, hasNext, prevIndex, nextIndex);
     }
 
+    @Transactional
     public Board detail(int id){
+        boardRepository.updateHits(id);
         return boardRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("글 상세보기 실패 id: " + id);
         });
