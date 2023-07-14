@@ -19,13 +19,17 @@
                                  <span style="font-size: 0.75rem;" th:text="${#dates.format(reply.createdTime, 'yyyy-MM-dd hh:mm')}"></span>
                             </div>
                         </div>
-                        <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 0.875rem; padding: 0;" th:text="${reply.content}"></div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 0.875rem; padding: 0;" th:text="${reply.content}"></div>
+<!--                            <a th:if="${principal.id == reply.user.id}" style="font-size: 0.75rem; text-decoration: none;" th:href="@{'javascript:deleteReply(' + ${reply.id} + ');'}" th:text="|&#10006;|"></a>-->
+                            <button th:if="${principal.id == reply.user.id}" class="btn-delete-reply btn btn-basic btn-small" style="font-size: 0.625rem; text-decoration: none;"
+                                    th:onclick="|deleteReply(${reply.id});|" th:text="|&#10006;|"></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-}
 </body>
 </html>

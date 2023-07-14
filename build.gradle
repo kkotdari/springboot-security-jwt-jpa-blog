@@ -2,10 +2,14 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.13'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	// 외장 서버 사용 설정
+	id 'war'
 }
 
 group = 'com.kkot'
-version = '0.0.1-SNAPSHOT'
+version = '1'
+// 외장 서버 사용 설정
+apply plugin: 'war'
 
 java {
 	sourceCompatibility = '11'
@@ -40,4 +44,12 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+// 외장 서버 사용 설정
+bootWar {
+	enabled = false
+}
+// 외장 서버 사용 설정
+war {
+	enabled = true
 }

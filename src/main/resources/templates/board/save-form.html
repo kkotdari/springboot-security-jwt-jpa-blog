@@ -8,19 +8,21 @@
             <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128221; 게시글 작성</h3>
             <div class="card shadow mb-4" style="padding: 2.125rem;">
                 <input type="hidden" class="form-control" id="username" placeholder="${user.username">
+                <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="제목"></span>
                 <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
-                    <span class="input-group-text" style="background-color: transparent;">제목</span>
-                    <input type="text" class="form-control" id="title" aria-label="title" style="font-size: 0.875rem;">
+<!--                    <span class="input-group-text" style="background-color: transparent;">제목</span>-->
+                    <input type="text" class="form-control" id="title" aria-label="title" style="font-size: 0.875rem;" th:placeholder="제목">
                 </div>
+                <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="내용"></span>
                 <div class="input-group shadow" style="border-radius: 0.25rem;">
-                    <span class="input-group-text" style="background-color: transparent;">내용</span>
-                    <textarea class="form-control" id="content" aria-label="content" rows="10" style="font-size: 0.875rem;"></textarea>
+<!--                    <span class="input-group-text" style="background-color: transparent;">내용</span>-->
+                    <textarea class="form-control" id="content" aria-label="content" rows="10" style="font-size: 0.875rem;"th:placeholder="내용"></textarea>
                 </div>
             </div>
         </div>
         <div style="text-align: center;">
             <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0; border-radius: 0.25rem;">
-                <button type="button" onclick="location.href='/boards'" class="btn btn-primary" style="font-size: 1rem;">취소</button>
+                <button type="button" onclick="history.back()" class="btn btn-primary" style="font-size: 1rem;">취소</button>
                 <button id="btn-save-board" class="btn btn-primary" style="font-size: 1rem;">확인</button>
             </div>
         </div>

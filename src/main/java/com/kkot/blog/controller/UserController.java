@@ -57,7 +57,7 @@ public class UserController {
 
     @GetMapping("/update-form")
     public String updateForm(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
-        model.addAttribute("user", userService.find(principalDetails.getUser().getId()));
+        model.addAttribute("principal", userService.find(principalDetails.getUser().getId()));
         return "user/update-form";
     }
 
@@ -79,7 +79,7 @@ public class UserController {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "f39050ec53184eddbfff9a9658afaf80");
-        params.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+        params.add("redirect_uri", "http://localhost:8080/users/auth/kakao/callback");
         params.add("code", code);
 
         // HttpHeader와 HttpBody를 하나의 오브젝트에 담기

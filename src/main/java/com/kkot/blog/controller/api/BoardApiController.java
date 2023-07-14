@@ -37,31 +37,12 @@ public class BoardApiController {
 
     @PutMapping("/{id}")
     public ResponseDTO<Integer> update(@PathVariable int id, @RequestBody Board requestBoard) {
-        System.out.println("BoardApiController.update");
-        System.out.println("id = " + id + ", requestBoard.tltle = " + requestBoard.getTitle() +", requestBoard.content = " + requestBoard.getContent());
         boardService.update(id, requestBoard);
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
     }
     @DeleteMapping("/{id}")
     public ResponseDTO<Integer> delete(@PathVariable int id) {
         boardService.delete(id);
-        return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
-    }
-
-    // 댓글 부분
-    // 데이터 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다.
-    // dto 사용하지 않은 이유는!!
-    @PostMapping("/{boardId}/replies")
-    public ResponseDTO<Integer> replySave(@RequestBody ReplySaveRequestDTO replySaveRequestDto) {
-        System.out.println("BoardApiController.replySave");
-        System.out.println("replySaveRequestDto.userId = " + replySaveRequestDto.getUserId());
-        replyService.saveReply(replySaveRequestDto);
-        return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
-    }
-
-    @DeleteMapping("/{boardId}/replies/{replyId}")
-    public ResponseDTO<Integer> replyDelete(@PathVariable int replyId) {
-        replyService.deleteReply(replyId);
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
     }
 }

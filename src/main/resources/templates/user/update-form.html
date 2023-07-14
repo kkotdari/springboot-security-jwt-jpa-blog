@@ -7,22 +7,28 @@
         <div class="card mt-3 col-md-12 col-lg-4" style="margin: 0 auto; border: none;">
             <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128100; 회원 정보</h3>
             <div class="card shadow mb-4" style="padding: 2.125rem;">
-                <input type="hidden" id="user-id" th:value="${user.id}" />
+                <input type="hidden" id="user-id" th:value="${principal.id}" />
+                <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="아이디"></span>
                 <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                    <span class="input-group-text justify-content-center" style="width: 35%; min-width: 200px; background-color: transparent;">아이디</span>-->
-                    <input type="text" class="form-control" id="username" aria-label="username" style="font-size: 0.875rem;" th:value="${user.username}" readonly>
+                    <input type="text" class="form-control" id="username" aria-label="username" style="font-size: 0.875rem;" th:value="${principal.username}" readonly>
                 </div>
-                <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+                <span th:if="${principal.oauth == null}" style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="비밀번호"></span>
+                <div th:if="${principal.oauth == null}" class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                    <span class="input-group-text justify-content-center" style="width: 35%; min-width: 200px; background-color: transparent;">비밀번호</span>-->
-                    <input type="password" class="form-control" id="password" aria-label="password" style="font-size: 0.875rem;" placeholder="비밀번호" required>
+                    <input type="password" class="form-control" id="password" aria-label="password" style="font-size: 0.875rem;" placeholder="비밀번호 입력" required>
                 </div>
-                <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+                <div th:if="${principal.oauth == null}" class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                    <span class="input-group-text justify-content-center" style="width: 35%; min-width: 200px; background-color: transparent;">비밀번호 확인</span>-->
                     <input type="password" class="form-control" id="password2" aria-label="password2" style="font-size: 0.875rem;" placeholder="비밀번호 확인" required>
                 </div>
-                <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+                <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="이메일"></span>
+                <div th:if="${principal.oauth == null}" class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                    <span class="input-group-text justify-content-center" style="width: 35%; min-width: 200px; background-color: transparent;">이메일</span>-->
-                    <input type="email" class="form-control" id="email" aria-label="email" style="font-size: 0.875rem;" th:value="${user.email}" required>
+                    <input type="email" class="form-control" id="email" aria-label="email" style="font-size: 0.875rem;" th:value="${principal.email}" required>
+                </div>
+                <div th:if="${principal.oauth != null}" class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
+                    <input type="email" class="form-control" id="email" aria-label="email" style="font-size: 0.875rem;" th:value="${principal.email}" readonly>
                 </div>
             </div>
         </div>

@@ -30,6 +30,8 @@ public class PrincipalDetails implements UserDetails { // 스프링 시큐리티
         return user.getUsername();
     }
 
+    public String getOAuth() { return user.getOauth(); }
+
     // 계정이 만료 여부 리턴
     @Override
     public boolean isAccountNonExpired() {

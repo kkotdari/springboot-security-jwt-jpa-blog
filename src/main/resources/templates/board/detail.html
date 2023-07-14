@@ -20,7 +20,7 @@
           <div class="card-body" style="padding: 1rem;">
             <h6 class="m-0 font-weight-bold text-primary" style="font-size: 1.25rem; padding-bottom: 1rem; font-weight: bold;" th:text="${board.title}"></h6>
             <div class="row no-gutters align-items-center">
-              <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 1rem;" th:text="${board.content}"></div>
+              <div class="mb-0 font-weight-bold text-gray-800" style="font-size: 1rem; white-space:pre-line;" th:text="${board.content}"></div>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
   </div>
   <div style="text-align: center;">
     <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0; border-radius: 0.25rem;">
-      <button type="button" onclick="location.href='/boards'" class="btn btn-primary" style="font-size: 1rem;">목록</button>
+      <button type="button" onclick="history.back()" class="btn btn-primary" style="font-size: 1rem;">목록</button>
       <button th:if="${board.user.id == principal.id}" type="button" th:onclick="|location.href='@{|/boards/update-form/${board.id}|}'|" class="btn btn-primary" style="font-size: 1rem;">수정</button>
       <button th:if="${board.user.id == principal.id}" type="button" id="btn-delete-board" class="btn btn-primary" style="font-size: 1rem;">삭제</button>
     </div>
@@ -46,21 +46,6 @@
 </div>
 <script src="/js/board.js"></script>
 <script th:inline="javascript">
-  // 초기 세팅
-  let boardId = $("#board-id").val();
-  $(document).ready(() => {
-      $.ajax({
-          type: "GET",
-          url: "/boards/" + boardId + "/replies",
-          success: function (fragment) {
-              console.log("reply-list 통신 성공!");
-              document.getElementById("reply-list").innerHTML = fragment;
-          },
-          error: function (err) {
-              console.log("요청실패", err);
-          }
-      });
-  })
 </script>
 </th:block>
 </html>

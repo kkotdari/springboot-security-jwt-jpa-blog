@@ -10,19 +10,21 @@
             <input type="hidden" id="board-id" th:value="${board.id}">
             <input type="hidden" id="username" th:value="${board.user.username}">
             <input type="hidden" id="hits" th:value="${board.hits}">
+            <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="제목"></span>
             <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
-                <span class="input-group-text" style="background-color: transparent;">제목</span>
+<!--                <span class="input-group-text" style="background-color: transparent;">제목</span>-->
                 <input type="text" class="form-control" id="title" aria-label="title" style="font-size: 0.875rem;" th:value="${board.title}">
             </div>
+            <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="내용"></span>
             <div class="input-group shadow" style="border-radius: 0.25rem;">
-                <span class="input-group-text" style="background-color: transparent;">내용</span>
+<!--                <span class="input-group-text" style="background-color: transparent;">내용</span>-->
                 <textarea class="form-control" id="content" aria-label="content" rows="10" style="font-size: 0.875rem;" th:text="${board.content}"></textarea>
             </div>
         </div>
     </div>
     <div style="text-align: center;">
         <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0; border-radius: 0.25rem;">
-            <button type="button" th:onclick="|location.href='@{|/boards/${board.id}|}'|" class="btn btn-primary" style="font-size: 1rem;">취소</button>
+            <button type="button" th:onclick="history.back()" class="btn btn-primary" style="font-size: 1rem;">취소</button>
             <button id="btn-update-board" class="btn btn-primary" style="font-size: 1rem;">확인</button>
         </div>
     </div>

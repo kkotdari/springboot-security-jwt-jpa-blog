@@ -8,10 +8,12 @@
             <div class="card mt-3 col-md-12 col-lg-4" style="margin: 0 auto; border: none;">
                 <h3 style=" font-size: 1.5625rem; font-weight: bold; text-align: left; padding: 0.8125rem;">&#128100; 로그인</h3>
                 <div class="card shadow mb-4" style="padding: 2.125rem;">
+                    <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="아이디"></span>
                     <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                        <span class="input-group-text justify-content-center" style="width: 25%; min-width: 100px; background-color: transparent;">아이디</span>-->
                         <input type="text" class="form-control" name="username" aria-label="username" style="font-size: 0.875rem;" placeholder="아이디">
                     </div>
+                    <span style="font-size: 0.75rem; padding-bottom: 0.25rem;" th:text="비밀번호"></span>
                     <div class="input-group mb-3 shadow" style="border-radius: 0.25rem;">
 <!--                        <span class="input-group-text justify-content-center" style="width: 25%; min-width: 100px; background-color: transparent;">비밀번호</span>-->
                         <input type="password" class="form-control" name="password" aria-label="password" style="font-size: 0.875rem;" placeholder="비밀번호">
@@ -21,8 +23,12 @@
             <div style="text-align: center;">
                 <div class="btn-group shadow" role="group" aria-label="Basic example" style="padding: 0; border-radius: 0.25rem;">
                     <button type="button" onclick="history.back()" class="btn btn-primary" style="font-size: 1rem;">취소</button>
-                    <button type="submit" class="btn btn-primary" style="font-size: 1rem;">확인</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 1rem;">로그인</button>
                 </div>
+                <span class="small" th:text=" 또는 "></span>
+                <a th:href="'https://kauth.kakao.com/oauth/authorize?client_id=f39050ec53184eddbfff9a9658afaf80&redirect_uri=http://localhost:8080/users/auth/kakao/callback&response_type=code'">
+                    <img src="/image/btn-kakao-oauth.png" style="height: 2.5rem;" />
+                </a>
             </div>
         </form>
     </div>

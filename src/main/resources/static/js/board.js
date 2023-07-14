@@ -1,4 +1,32 @@
+function deleteReply(replyId){
+    let boardId = $("#board-id").val();
+    $.ajax({
+        type: "DELETE",
+        url: "/boards/" + boardId + "/replies/" + replyId,
+    }).done(function(fragment){
+        alert("댓글 삭제가 완료되었습니다.");
+        console.log("deleteReply 성공, reply-list 통신 성공!");
+        document.getElementById("reply-list").innerHTML = fragment;
+    }).fail(function(error){
+        alert(JSON.stringify(error));
+    });
+}
+
 $(document).ready(function(){
+    // 초기 세팅
+    let boardId = $("#board-id").val();
+    $.ajax({
+      type: "GET",
+      url: "/boards/" + boardId + "/replies",
+      success: function (fragment) {
+          console.log("reply-list 통신 성공!");
+          document.getElementById("reply-list").innerHTML = fragment;
+      },
+      error: function (err) {
+          console.log("요청실패", err);
+      }
+    });
+
     init();
 
     function init(){
@@ -87,26 +115,14 @@ $(document).ready(function(){
         };
         $.ajax({
             type: "POST",
-            url: "/api/v1/boards/" + data.boardId + "/replies",
+            url: "/boards/" + data.boardId + "/replies",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        }).done(function(resp){
+        }).done(function(fragment){
             alert("댓글 작성이 완료되었습니다.");
-            location.href = "/boards/" + boardId;
-        }).fail(function(error){
-            alert(JSON.stringify(error));
-        });
-    }
-
-   function deleteReply(boardId, replyId){
-        $.ajax({
-            type: "DELETE",
-            url: "/api/board/" + boardId + "/reply/" + replyId,
-            dataType: "json"
-        }).done(function(resp){
-            alert("댓글 삭제가 완료되었습니다.");
-            location.href = "/boards/" + boardId;
+            console.log("saveReply 성공, reply-list 통신 성공!");
+            $("#reply-content").val("");
+            document.getElementById("reply-list").innerHTML = fragment;
         }).fail(function(error){
             alert(JSON.stringify(error));
         });

@@ -2,6 +2,8 @@ package com.kkot.blog.controller;
 
 import com.kkot.blog.config.auth.PrincipalDetails;
 import com.kkot.blog.dto.PageDTO;
+import com.kkot.blog.dto.ReplySaveRequestDTO;
+import com.kkot.blog.dto.ResponseDTO;
 import com.kkot.blog.model.Board;
 import com.kkot.blog.service.BoardService;
 import com.kkot.blog.service.ReplyService;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,10 +54,26 @@ public class BoardController {
     }
     //////////// ~ 두 메서드 통합하기
 
-    @GetMapping("/{id}/replies")
-    public String boardList(@PathVariable("id") int boardId, Model model) {
-        System.out.println("boardId = " + boardId);
+    @GetMapping("/{id}/replies") // 댓글 목록 받기
+    public String boardList(@PathVariable("id") int boardId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         model.addAttribute("replyList", replyService.replyList(boardId));
+        model.addAttribute("principal", principalDetails.getUser());
+        return "fragment/reply-list :: replyList";
+    }
+
+    @PostMapping("/{boardId}/replies") // 댓글 작성하기
+    public String replySave(@RequestBody ReplySaveRequestDTO replySaveRequestDto, @PathVariable int boardId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        replyService.saveReply(replySaveRequestDto);
+        model.addAttribute("replyList", replyService.replyList(boardId));
+        model.addAttribute("principal", principalDetails.getUser());
+        return "fragment/reply-list :: replyList";
+    }
+
+    @DeleteMapping("/{boardId}/replies/{replyId}") // 댓글 삭제하기
+    public String replyDelete(@PathVariable int replyId, @PathVariable int boardId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        replyService.deleteReply(replyId);
+        model.addAttribute("replyList", replyService.replyList(boardId));
+        model.addAttribute("principal", principalDetails.getUser());
         return "fragment/reply-list :: replyList";
     }
 
